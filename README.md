@@ -8,7 +8,7 @@ Sanjay Basu, MD, PhD*, Russell S. Phillips, Seth A. Berkowitz, Bruce E. Landon, 
 
 We sought to identify how geographic inequalities in mortality may be closed by reducing inequality in PCP density. 
 
-Original study protocol:
+*Original study protocol:*
 
 
 Data sources, outcomes, and covariates
