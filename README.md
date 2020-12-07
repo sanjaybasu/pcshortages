@@ -1,4 +1,4 @@
-# Impact of alleviating primary care shortages on geographic inequalities in mortality in the United States
+# Impact of alleviating primary care shortages on mortality in the United States
 
 
 Sanjay Basu, MD, PhD*, Russell S. Phillips, Seth A. Berkowitz, Bruce E. Landon,  Asaf Bitton, Robert L. Phillips
