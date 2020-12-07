@@ -6,7 +6,7 @@ Sanjay Basu, MD, PhD*, Russell S. Phillips, Seth A. Berkowitz, Bruce E. Landon, 
 *sanjay_basu@hms.harvard.edu
 
 
-We sought to identify how geographic inequalities in mortality may be closed by reducing inequality in PCP density. 
+We sought to estimate the degree to which alleviating PCP shortages may improve mortality in the United States.
 
 *Original study protocol:*
 
