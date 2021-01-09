@@ -340,12 +340,20 @@ predicted_delta1.5 = predict(mem.5, newdata=predictdata_goal, type='response', s
 predicted_delta1.6 = predict(mem.6, newdata=predictdata_goal, type='response', se=T)-predict(mem.6, newdata=predictdata_baseline, type='response', se=T) 
 predicted_delta1.7 = predict(mem.7, newdata=predictdata_goal, type='response', se=T)-predict(mem.7, newdata=predictdata_baseline, type='response', se=T) 
 summary(predicted_delta1.1)
+quantile(predicted_delta1.1,c(.025,.975))
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975))
 summary(predicted_delta1.3)
+quantile(predicted_delta1.3,c(.025,.975))
 summary(predicted_delta1.4)
+quantile(predicted_delta1.4,c(.025,.975))
 summary(predicted_delta1.5)
+quantile(predicted_delta1.5,c(.025,.975))
 summary(predicted_delta1.6)
+quantile(predicted_delta1.6,c(.025,.975))
 summary(predicted_delta1.7)
+quantile(predicted_delta1.7,c(.025,.975))
+
 
 #  scenario 2: if achieving 1 pcp  per 1,500 pop
 predicted_delta2.1 = predict(mem.1, newdata=predictdata_goal2, type='response', se=T)-predict(mem.1, newdata=predictdata_baseline2, type='response', se=T) 
@@ -356,12 +364,20 @@ predicted_delta2.5 = predict(mem.5, newdata=predictdata_goal2, type='response', 
 predicted_delta2.6 = predict(mem.6, newdata=predictdata_goal2, type='response', se=T)-predict(mem.6, newdata=predictdata_baseline2, type='response', se=T) 
 predicted_delta2.7 = predict(mem.7, newdata=predictdata_goal2, type='response', se=T)-predict(mem.7, newdata=predictdata_baseline2, type='response', se=T) 
 summary(predicted_delta2.1)
+quantile(predicted_delta2.1,c(.025,.975))
 summary(predicted_delta2.2)
+quantile(predicted_delta2.2,c(.025,.975))
 summary(predicted_delta2.3)
+quantile(predicted_delta2.3,c(.025,.975))
 summary(predicted_delta2.4)
+quantile(predicted_delta2.4,c(.025,.975))
 summary(predicted_delta2.5)
+quantile(predicted_delta2.5,c(.025,.975))
 summary(predicted_delta2.6)
+quantile(predicted_delta2.6,c(.025,.975))
 summary(predicted_delta2.7)
+quantile(predicted_delta2.7,c(.025,.975))
+
 
 
 ##### GEE #####
@@ -412,12 +428,19 @@ predicted_delta1.5 = exp(rowSums(gee.5.betamatrix*predictdata_goal) +  gee.5.bet
 predicted_delta1.6 = exp(rowSums(gee.6.betamatrix*predictdata_goal) +  gee.6.beta[1])-exp(rowSums(gee.6.betamatrix*predictdata_baseline) +  gee.6.beta[1])
 predicted_delta1.7 = exp(rowSums(gee.7.betamatrix*predictdata_goal) +  gee.7.beta[1])-exp(rowSums(gee.7.betamatrix*predictdata_baseline) +  gee.7.beta[1])
 summary(predicted_delta1.1)
+quantile(predicted_delta1.1,c(.025,.975))
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975))
 summary(predicted_delta1.3)
+quantile(predicted_delta1.3,c(.025,.975))
 summary(predicted_delta1.4)
+quantile(predicted_delta1.4,c(.025,.975))
 summary(predicted_delta1.5)
+quantile(predicted_delta1.5,c(.025,.975))
 summary(predicted_delta1.6)
+quantile(predicted_delta1.6,c(.025,.975))
 summary(predicted_delta1.7)
+quantile(predicted_delta1.7,c(.025,.975))
 
 #  scenario 2: if achieving 1 pcp  per 1,500 pop
 predicted_delta2.1 = exp(rowSums(gee.1.betamatrix*predictdata_goal2) +  gee.1.beta[1])-exp(rowSums(gee.1.betamatrix*predictdata_baseline2) +  gee.1.beta[1])
@@ -428,12 +451,19 @@ predicted_delta2.5 = exp(rowSums(gee.5.betamatrix*predictdata_goal2) +  gee.5.be
 predicted_delta2.6 = exp(rowSums(gee.6.betamatrix*predictdata_goal2) +  gee.6.beta[1])-exp(rowSums(gee.6.betamatrix*predictdata_baseline2) +  gee.6.beta[1])
 predicted_delta2.7 = exp(rowSums(gee.7.betamatrix*predictdata_goal2) +  gee.7.beta[1])-exp(rowSums(gee.7.betamatrix*predictdata_baseline2) +  gee.7.beta[1])
 summary(predicted_delta2.1)
+quantile(predicted_delta2.1,c(.025,.975))
 summary(predicted_delta2.2)
+quantile(predicted_delta2.2,c(.025,.975))
 summary(predicted_delta2.3)
+quantile(predicted_delta2.3,c(.025,.975))
 summary(predicted_delta2.4)
+quantile(predicted_delta2.4,c(.025,.975))
 summary(predicted_delta2.5)
+quantile(predicted_delta2.5,c(.025,.975))
 summary(predicted_delta2.6)
+quantile(predicted_delta2.6,c(.025,.975))
 summary(predicted_delta2.7)
+quantile(predicted_delta2.7,c(.025,.975))
 
 
 
@@ -448,6 +478,7 @@ sum(short$shortfall[short$shortfall>0])/sum(short$shortfall>0)
 predictdata_baseline  = zpanel %>%
   filter(pc < (goal-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))),
          time == 2017) 
+dim(predictdata_baseline)
 #  scenario 1: 2017 data with pcp density raised to threshold for non-shortage counties
 predictdata_goal = predictdata_baseline %>%
   mutate(pc = goal)
@@ -455,8 +486,10 @@ predictdata_goal$pc = (predictdata_goal$pc-mean(na.omit(panel$pc)))/(2*sd(na.omi
 # predict delta in outcome of increasing PCP density among shortage areas from GAM all-cause mort model
 predicted_delta1.2 = predict(gam.2, newdata=predictdata_goal, type='response', se=T)$fit-predict(gam.2, newdata=predictdata_baseline, type='response', se=T)$fit 
 summary(predicted_delta1.2) # per 100k
+quantile(predicted_delta1.2,c(.025,.975)) # per 100k
 summary(predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000 # nationwide abs population
-  
+quantile((predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000,c(.025,.975)) # nationwide abs population
+
 
 goal = 100000/1500  # if goal is 1 PCP per 1500
 short = panel %>%
@@ -466,12 +499,15 @@ sum(short$shortfall[short$shortfall>0])
 predictdata_baseline  = zpanel %>%
   filter(pc < (goal-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))),
          time == 2017) 
+dim(predictdata_baseline)
 predictdata_goal = predictdata_baseline %>%
   mutate(pc = goal)
 predictdata_goal$pc = (predictdata_goal$pc-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))) #rescale
 predicted_delta1.2 = predict(gam.2, newdata=predictdata_goal, type='response', se=T)$fit-predict(gam.2, newdata=predictdata_baseline, type='response', se=T)$fit 
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975)) # per 100k
 summary(predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000 # nationwide abs population
+quantile((predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000,c(.025,.975)) # nationwide abs population
 
 
 
@@ -483,12 +519,15 @@ sum(short$shortfall[short$shortfall>0])
 predictdata_baseline  = zpanel %>%
   filter(pc < (goal-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))),
          time == 2017) 
+dim(predictdata_baseline)
 predictdata_goal = predictdata_baseline %>%
   mutate(pc = goal)
 predictdata_goal$pc = (predictdata_goal$pc-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))) #rescale
 predicted_delta1.2 = predict(gam.2, newdata=predictdata_goal, type='response', se=T)$fit-predict(gam.2, newdata=predictdata_baseline, type='response', se=T)$fit 
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975)) # per 100k
 summary(predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000 # nationwide abs population
+quantile((predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000,c(.025,.975)) # nationwide abs population
 
 
 
@@ -500,12 +539,16 @@ sum(short$shortfall[short$shortfall>0])
 predictdata_baseline  = zpanel %>%
   filter(pc < (goal-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))),
          time == 2017) 
+dim(predictdata_baseline)
 predictdata_goal = predictdata_baseline %>%
   mutate(pc = goal)
 predictdata_goal$pc = (predictdata_goal$pc-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))) #rescale
 predicted_delta1.2 = predict(gam.2, newdata=predictdata_goal, type='response', se=T)$fit-predict(gam.2, newdata=predictdata_baseline, type='response', se=T)$fit 
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975)) # per 100k
 summary(predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000 # nationwide abs population
+quantile((predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000,c(.025,.975)) # nationwide abs population
+
 
 
 goal = 100000/3000  # if goal is 1 PCP per 3000
@@ -516,12 +559,17 @@ sum(short$shortfall[short$shortfall>0])
 predictdata_baseline  = zpanel %>%
   filter(pc < (goal-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))),
          time == 2017) 
+dim(predictdata_baseline)
 predictdata_goal = predictdata_baseline %>%
   mutate(pc = goal)
 predictdata_goal$pc = (predictdata_goal$pc-mean(na.omit(panel$pc)))/(2*sd(na.omit(panel$pc))) #rescale
 predicted_delta1.2 = predict(gam.2, newdata=predictdata_goal, type='response', se=T)$fit-predict(gam.2, newdata=predictdata_baseline, type='response', se=T)$fit 
 summary(predicted_delta1.2)
+quantile(predicted_delta1.2,c(.025,.975)) # per 100k
 summary(predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000 # nationwide abs population
+quantile((predicted_delta1.2)*sum(panel$pop[panel$pc<goal & panel$time==2017])/100000,c(.025,.975)) # nationwide abs population
+
+
 
 # fig 2: PCPS per 100000 vs averted national deaths per year
 # PCPs per 100k per yr targets
@@ -532,25 +580,25 @@ x = c(100000/1500,
       100000/3500,
       0)
 # mean outcomes from table 3
-ymean = c(9404,
-          2691,
-          1002,
-          462,
+ymean = c(7123,
+          1982,
+          778,
+          392,
           230,
           0)
 # 25th %tile from table 3
-ymin =  c(7982,
-          2135,
-          704,
-          268,
-          103,
+ymin =  c(882,
+          219,
+          89,
+          10,
+          11,
           0)
 # 75th %tile from table 3
-ymax = c(10689,
-         3185,
-         1258,
-         634,
-         349,
+ymax = c(12795,
+         4041,
+         1722,
+         915,
+         538,
          0)
 
 fig2  = as.data.frame(cbind(x,ymean,ymin,ymax))
@@ -559,7 +607,7 @@ ggplot(data = fig2)+
   ggtitle("Primary care provider density versus averted mortality")+
   xlab("Primary care providers per 100,000 population")+
   ylab("Averted deaths per year")+
-  geom_ribbon(aes(ymin=ymin, ymax =ymax),fill="#6699CC")+
+  geom_ribbon(aes(ymin=ymin, ymax =ymax),fill="light gray")+
   geom_line()+
   theme_minimal()+
   geom_vline(xintercept = 100000/3500, linetype="dashed", color = "#6699CC", size = 1)+
